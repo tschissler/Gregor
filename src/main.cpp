@@ -26,9 +26,6 @@
 const char* ssid     = "agileMax_Guest";
 const char* password = "WLAN_agileMax";
 
-/*String containing Hostname, Device Id & Device Key in the format:                         */
-/*  "HostName=<host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"                */
-/*  "HostName=<host_name>;DeviceId=<device_id>;SharedAccessSignature=<device_sas_token>"    */
 static const char* connectionString = "HostName=IoTGregorHub.azure-devices.net;DeviceId=GregorsDevice;SharedAccessKey=O1wkse6KQXIiGOT/738g4dwnDiHrqmyg3uC8xwhB17M=";
 
 const char *messageData = "{\"deviceId\":\"%s\", \"messageId\":%d, \"Temperature\":%f, \"Humidity\":%f}";
