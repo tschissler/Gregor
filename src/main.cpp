@@ -113,12 +113,17 @@ static void DeviceTwinCallback(DEVICE_TWIN_UPDATE_STATE updateState, const unsig
   Serial.print("Desired Firmeware Version: ");
   Serial.println(desiredFirmwareVersion);
 
+  free(temp);
+
   if (strcmp(desiredFirmwareVersion, CURRENT_VERSION) != 0) {
     Serial.println();
     Serial.println("Starting Firmware OTA update ...");
+    char url [1000];
+    sprintf(url, "%s/%s/firmware.bin", BLOB_STORAGE_ROOT, desiredFirmwareVersion);
+    updateFromBLOB(url);
   }
 
-  free(temp);
+  
 }
 
 static int  DeviceMethodCallback(const char *methodName, const unsigned char *payload, int size, unsigned char **response, int *response_size)
@@ -157,6 +162,8 @@ void setup()
   Serial.begin(115200);
   Serial.println("ESP32 Device");
   Serial.println("Initializing...");
+  Serial.print("   Current Firmware Version");
+  Serial.println(CURRENT_VERSION);
 
   Serial.println("Initializing GPIO Ports");
   ledcSetup(redChannel, 5000, 8);
