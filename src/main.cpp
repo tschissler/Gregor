@@ -109,7 +109,14 @@ static void DeviceTwinCallback(DEVICE_TWIN_UPDATE_STATE updateState, const unsig
   Serial.print("Current Firmeware Version: ");
   Serial.println(CURRENT_VERSION);
   
-  const char* desiredFirmwareVersion = doc["desired"]["firmwareversion"];
+  const char* desiredFirmwareVersion;
+
+  if (!doc["desired"].isNull()) {
+    desiredFirmwareVersion = doc["desired"]["firmwareversion"];
+  }
+  else {
+    desiredFirmwareVersion = doc["firmwareversion"];
+  }
   Serial.print("Desired Firmeware Version: ");
   Serial.println(desiredFirmwareVersion);
 
@@ -162,7 +169,7 @@ void setup()
   Serial.begin(115200);
   Serial.println("ESP32 Device");
   Serial.println("Initializing...");
-  Serial.print("   Current Firmware Version");
+  Serial.print("   Current Firmware Version: ");
   Serial.println(CURRENT_VERSION);
 
   Serial.println("Initializing GPIO Ports");
