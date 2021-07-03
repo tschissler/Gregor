@@ -227,5 +227,11 @@ void loop()
       Esp32MQTTClient_Check();
     }
   }
+
+  ledcWrite(greenChannel, 255);
+  delay(20);
+  ledcWrite(greenChannel, 0);
+  delay(300);
+
   delay(10);
 }
